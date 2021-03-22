@@ -1,0 +1,45 @@
+version: "3.7"
+services:
+  api:
+    container_name: overdue
+    restart: always
+    env_file:
+     - .env
+    build: .
+    command: yarn start
+    environment:
+      SERVICE_NAME: overdue-customers
+      SERVICE_TAGS: dev
+      SERVICE_DB_HOST: ${DATABASE_HOST}:${DATABASE_PORT}
+      SERVICE_DB_USER: ${DATABASE_USERNAME}
+      SERVICE_DB_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - .:/usr/app
+      - /usr/app/node_modules
+    depends_on:
+      - db
+    ports:
+      - 3000:3000
+    networks:
+      - nest-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  db:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - db_data:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - nest-network
+
+networks:
+  nest-network:
+    driver: bridge
+volumes:
+  db_data: {}

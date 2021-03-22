@@ -1,0 +1,27 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "outDir": "dist/public",
+    "types": ["node"],
+    "downlevelIteration": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false
+  },
+
+  "files": [
+    "public/main.ts",
+    "public/polyfills.ts"
+  ],
+  "include": [
+    "public/**/*.d.ts"
+  ]
+}
